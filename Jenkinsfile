@@ -17,5 +17,12 @@ pipeline {
                 }
             }
         }
+        stage('clone'){
+            steps {
+                script {
+                    git clone ""C:\Users\priya\OneDrive\Desktop\jenkins\LabAssignment9  "
+                }
+            }
+        }
     }
 }
