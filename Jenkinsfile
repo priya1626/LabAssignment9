@@ -1,27 +1,21 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "docker-images"
+        CONTAINER_NAME = "docker-container"
+    }
+
     stages {
         stage('Build Docker Image') {
             steps {
-                script {
-                    dockerImage = docker.build("myapp:latest")
-                }
+                bat "docker build -t %IMAGE_NAME% ."
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                script {
-                    dockerImage.run('-d -p 8080:8080')
-                }
-            }
-        }
-        stage('clone'){
-            steps {
-                script {
-                    git clone ""C:\Users\priya\OneDrive\Desktop\jenkins\LabAssignment9  "
-                }
+                bat 'docker run -d --name %CONTAINER_NAME% %IMAGE_NAME%'
             }
         }
     }
